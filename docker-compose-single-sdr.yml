@@ -36,14 +36,12 @@ services:
     ports:
       - 8080:80
       - 15550:15550
-      - 15555:15555
     environment:
       - TZ=Etc/UTC
       - ADSB_LAT=${FEEDER_LAT}
       - ADSB_LON=${FEEDER_LONG}
       - ENABLE_ADSB=false
       - ENABLE_ACARS=external
-      - ENABLE_VDLM=external
     volumes:
       - acarshub_run:/run/acars
     tmpfs:
@@ -58,8 +56,6 @@ services:
     environment:
       - TZ=Etc/UTC
       - AR_SEND_UDP_ACARS=acarshub:5550;feedthe.acarsdrama.com:5550
-      - AR_SEND_UDP_VDLM2=acarshub:5555;feedthe.acarsdrama.com:5555
-      - AR_RECV_ZMQ_VDLM2=dumpvdl2:45555
     tmpfs:
       - /run:exec,size=64M
       - /var/log
