@@ -25,27 +25,26 @@ services:
       - /run:exec,size=64M
       - /var/log
 
-# This is a VDL2
-dumpvdl2:
-    image: ghcr.io/sdr-enthusiasts/docker-dumpvdl2:latest
-    tty: true
-    container_name: dumpvdl2
-    restart: always
-    devices:
-      - /dev/bus/usb:/dev/bus/usb
-    environment:
-      - FEED_ID=BLAH-KDFW-VDL2 # change this to be something unique that includes your nearest local airport, once you start feeding, send to a note to feeders [at] acarsdrama.com
-      - TZ=Etc/UTC
-      - SERIAL=00000001 # The serial number of the SDR you wish to assign to VDLM2
-      - FREQUENCIES=136.975 # Adjust this to your chosen ACARS Frequencies, seperate them with semi-colons to scan multiple freqs, e.g. 136.650;136.975;136.800;136.100;136.675
-      - ZMQ_MODE=server
-      - ZMQ_ENDPOINT=tcp://0.0.0.0:45555
-    tmpfs:
-      - /run:exec,size=64M
-      - /var/log
+  # This is a VDL2
+  dumpvdl2:
+      image: ghcr.io/sdr-enthusiasts/docker-dumpvdl2:latest
+      tty: true
+      container_name: dumpvdl2
+      restart: always
+      devices:
+        - /dev/bus/usb:/dev/bus/usb
+      environment:
+        - FEED_ID=BLAH-KDFW-VDL2 # change this to be something unique that includes your nearest local airport, once you start feeding, send to a note to feeders [at] acarsdrama.com
+        - TZ=Etc/UTC
+        - SERIAL=00000001 # The serial number of the SDR you wish to assign to VDLM2
+        - FREQUENCIES=136.975 # Adjust this to your chosen ACARS Frequencies, seperate them with semi-colons to scan multiple freqs, e.g. 136.650;136.975;136.800;136.100;136.675
+        - ZMQ_MODE=server
+        - ZMQ_ENDPOINT=tcp://0.0.0.0:45555
+      tmpfs:
+        - /run:exec,size=64M
+        - /var/log
 
-# ACARS HUB AND ACARS ROUTER IMAGES - ACARS Hub will listen on http://<ip>:8080
-
+  # ACARS HUB AND ACARS ROUTER IMAGES - ACARS Hub will listen on http://<ip>:8080
   acarshub:
     image: ghcr.io/sdr-enthusiasts/docker-acarshub:latest
     tty: true
